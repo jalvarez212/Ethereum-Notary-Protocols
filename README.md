@@ -13,13 +13,13 @@ Welcome to the crepository! This project is aimed at providing a simple and effi
 
 ## Introduction
 
-DApp Builder is designed to streamline the process of developing DApps by providing a set of tools and libraries. It simplifies the integration of smart contracts into your application and offers various utilities to interact with the Ethereum blockchain. By leveraging DApp Builder, you can focus on your application logic without worrying about the intricacies of blockchain development. Customize your contract logic and launch your very own NFT contract frontend you can edit and share. 
+Ethereum Franchising Protocol is designed to streamline the process of developing DApps by providing a set of tools and libraries. It simplifies the integration of smart contracts into your application and offers various utilities to interact with the Ethereum blockchain. By leveraging Ethereum Franchising Protocol, you can focus on your application logic without worrying about the intricacies of blockchain development. Customize your contract logic and launch your very own NFT/Defi/Token contract with frontend UI you can edit and share. User have full control over the conracts they create and have full domain to leverage and share it as they see fit. This tool only facilitiates the configutration and deployment of smart contracts. User can deploy their own versions of the most popular implementations and decentralized architechtures. 
 
 ## Features
 
 - **Smart Contract Development**: Ethereum Franchising Protocol  provides a development environment and toolset for creating, testing, and deploying smart contracts.
 - **Web3 Integration**: Easily integrate your DApp with the Ethereum network using the Web3 library, allowing seamless interaction with smart contracts.
-- **UI Components**: DApp Builder includes a collection of reusable UI components that you can leverage to build intuitive and user-friendly interfaces for your DApp.
+- **UI Components**: Ethereum Franchising Protocol includes a collection of reusable UI components that you can leverage to build intuitive and user-friendly interfaces for your DApp.
 - **Deployment Scripts**: Simplify the deployment process by utilizing pre-configured deployment scripts, enabling easy deployment of your DApp to various Ethereum networks.
 - **Runs locally in your browser**: All method and transaction outside of loading the webpage are handled on your client. We think we can decentralize even the loading of the of the frontend in a decentralized manner in the future.
 - **Decentralized Ownership: The protocol enables users to leverage the decentralized nature of blockchain technology. Users maintain control over their decentralized applications, while the protocol ensures compliance with established franchise agreements.
@@ -57,7 +57,7 @@ To install and use DApp Builder, follow these steps:
 4. Open your browser and load http://localhost:3000/
 
 
-Congratulations! You have successfully launched DApp Builder.
+Congratulations! You have successfully launched Ethereum Franchising Protocol.
 
 ## Usage
 **Please note this application only works on the ETHGoerli Testnet at the moment**
@@ -70,7 +70,7 @@ Congratulations! You have successfully launched DApp Builder.
 **Please note this application only works on the ETHGoerli Testnet at the moment**
 
 
-We welcome contributions from the community to make DApp Builder even better. If you'd like to contribute, please follow these guidelines:
+We welcome contributions from the community to make Ethereum Franchising Protocol even better. If you'd like to contribute, please follow these guidelines:
 
 1. Fork the repository and clone it locally.
 2. Create a new branch for your feature or bug fix.
