@@ -32,7 +32,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.min.js" type="module"></script>
     <script src="https://c0f4f41c-2f55-4863-921b-sdk-docs.github.io/cdn/metamask-sdk.js"></script>
     <script>
-        // function sdkf(){
+        function sdkf(){
             const sdk = new MetaMaskSDK.MetaMaskSDK({
             dappMetadata: {
                 name: 'TTT',
@@ -45,7 +45,7 @@
         })
 
 
-        // }
+     }
 
     </script>
 
@@ -188,7 +188,7 @@
 
         }
         function connect() {
-            // sdkf()
+            sdkf()
             ethereum.request({ method: 'eth_requestAccounts' })
                 .then((res) => console.log('res', res))
                 .catch((e) => console.log('e', e))
