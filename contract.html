@@ -20,6 +20,15 @@
 </head>
 
 <script>
+            function connect() {
+            // sdkf()
+            ethereum.request({ method: 'eth_requestAccounts' })
+                .then((res) => console.log('res', res))
+                .catch((e) => console.log('e', e))
+
+
+        }
+
     // Function to fetch and display string from localStorage
     function fetchString(key) {
         // Check if the key exists in localStorage
@@ -141,7 +150,7 @@
                                     </li>
                             </div> <!-- navbar collapse -->
                             <div class="button add-list-button">
-                                <a href="javascript:void(0)" class="btn">Get it now</a>
+                                <a onclick="connect()" class="btn">Connect Wallet</a>
                             </div>
                         </nav>
                         <!-- End Navbar -->
