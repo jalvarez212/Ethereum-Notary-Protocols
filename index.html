@@ -174,19 +174,20 @@
                 localStorage.setItem('ipfs_tx', result.path);
                 //localStorage.setItem('adsress', JSON.parse(re.contract).address))
 
+                let symbol = document.getElementById('lname').innerHTML;
+                localStorage.setItem('symbol', symbol);
+                let name = document.getElementById('fname').innerHTML;
+                localStorage.setItem('contract_name', name);
+
+
+
             }
             photo = document.getElementById("photo");
             let nft = reader.readAsArrayBuffer(photo.files[0]); // Read Provided File
             let name = document.getElementById('fname');
             let symbol = document.getElementById('lname');
-            // let chunk = await fetch('/request', {
-            //     method: 'POST',
-            //     headers: {
-            //       'Accept': 'application/json',
-            //       'Content-Type': 'application/json'
-            //     },
-            //     body: JSON.stringify({ "name": name.value, 'symbol': symbol.value })
-            // })
+
+
 
 
         }
@@ -467,7 +468,7 @@
                     <br>
                     <br>
 
-                    <label for="lname">Number of Tokens Avaiable:</label><br>
+                    <label for="lname">Number of Tokens Available:</label><br>
                     <input
                         style="box-shadow: rgba(238, 55, 55, 0.4) 5px 5px, rgba(244, 30, 30, 0.3) 10px 10px, rgba(240, 46, 46, 0.2) 15px 15px, rgba(240, 46, 46, 0.388) 20px 20px, rgba(240, 46, 49, 0.31) 25px 25px;"
                         type="text" id="lname" name="lname" value="" required="required"><br><br>
